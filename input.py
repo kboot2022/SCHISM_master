@@ -5,13 +5,10 @@
 #######convert fron lon/lat to UTM coords #######
 #generate lon and lat variables 
 
+gd = read_schism_hgrid(“hgrid.gr3”)
 gd.lon,gd.lat=gd.x,gd.y
+gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918") #Reassign x and y to be points, not lon/lat coords -- now 2 sets of variables
 
-#Reassign x and y to be points, not lon/lat coords -- now 2 sets of variables
-
-gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
-
-# Two sets of variables, lon/lat and x/y
 #Reverse operation
 #gd.lon, gd.lat = proj_pts(gd.x, gd.y, "epsg:26918", "epsg:4326")
 #gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
