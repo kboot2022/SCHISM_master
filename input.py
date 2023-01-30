@@ -1,4 +1,43 @@
-# Read and plot grid file for boundary assignment:
+# 1. First, generate .2dm grid in SMS, convert to .gr3 file, then generate boundary files grd.bnd
+
+# 2. Make a new empty data/ folder in your project folder, and create a hgrid.11 file
+# tranform SCHISM grid
+
+proj('data/hgrid.gr3',0,'epsg:26918','data/hgrid.ll',0,'epsg:4326')
+
+# 3. Append boundaries to end of hgrid file
+	
+cat grd.bnd >>hgrid.gr3 
+	
+#in mac, under ipython (do this before making any plot)
+mpl.use('QtAgg')
+
+# 4. write values to gr3
+
+gd=read_schism_hgrid('data/hgrid.gr3')
+gd.write_hgrid('data/tmp2.gr3',value=0.1) 
+
+# 5. To run in Stampede:
+# *** If permission access denied, QQ needs to allow permission using “chmod 755 foldername -R” ***
+
+	#Copy recent experiment folder to new updated folder in work directory, and replace the old with the new grid files
+
+# 6. Also update vgrid.in: use gen_vqs.py
+
+gen_vqs.py
+
+# —> move to data folder before moving entire folder to stampede
+#scp -r *.nc hgrid.ll *.gr3 *.in tvd.prop tg876033@stampede2.tacc.utexas.edu:/work2/08304/tg876033/stampede2/schism/APS/Input/RUN02b
+
+# 7. Update bctides.in for the number of nodes along the open boundaries
+
+# 8. Find the element number for the Pasquotank and the New River, and update them in the source_sink.in.
+ 
+# 9. Copy everything from work to scratch before running:
+
+# cp -r /work2/06713/lqq0622/stampede2/schism/APS/Input/RUN02a RUN02a
+       
+       # Read and plot grid file for boundary assignment:
 
 gd = read_schism_hgrid(“filename.gr3”)
 gd.plot()
