@@ -1,5 +1,7 @@
 # 1. First, generate .2dm grid in SMS, convert to .gr3 file, then generate boundary files grd.bnd
 
+## Qianqian Liu is trying to edit it.
+
 # sms2grd('data/latest_mesh_name.2dm','data/hgrid.gr3')
 
 #######convert fron lon/lat to UTM coords #######
