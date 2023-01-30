@@ -2,6 +2,21 @@
 
 # sms2grd('data/latest_mesh_name.2dm','data/hgrid.gr3')
 
+#######convert fron lon/lat to UTM coords #######
+#generate lon and lat variables 
+
+gd.lon,gd.lat=gd.x,gd.y
+
+#Reassign x and y to be points, not lon/lat coords -- now 2 sets of variables
+
+gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
+
+# Two sets of variables, lon/lat and x/y
+#Reverse operation
+#gd.lon, gd.lat = proj_pts(gd.x, gd.y, "epsg:26918", "epsg:4326")
+#gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
+
+
 # 2. Make a new empty data/ folder in your project folder, and create a hgrid.11 file
 # tranform SCHISM grid
 
@@ -54,21 +69,6 @@ show(block=False)
 #Pamlico: 3.931826e6, 3.929105e6, 3.17280e5, 3.16335e5
 #Neuse: 3.892039e6, 3.890990e6, 3.12039e5, 3.11462e5
 #Cape Fear: 3.791924e6, 3.792303e6, 2.28337e5, 2.28018e5
-
-#convert fron lon/lat to UTM coords
-
-#generate lon and lat first
-
-gd.lon,gd.lat=gd.x,gd.y
-
-#Reassign x and y to be points, not lon/lat coords -- now 2 sets of variables
-
-gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
-
-#** Two sets of variables, lon/lat and x/y
-#Reverse operation
-#gd.lon, gd.lat = proj_pts(gd.x, gd.y, "epsg:26918", "epsg:4326")
-#gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
 
 # compute the boundaries based on the x y coords
 # example: gd.compute_bnd(bxy = [ [x1,x2, y1,y2], [ x1,x2, y1, y2] ] for each point
