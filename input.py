@@ -10,12 +10,15 @@ gd = read_schism_hgrid(“hgrid.gr3”)
 gd.lon,gd.lat=gd.x,gd.y
 gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918") #Reassign x and y to be points, not lon/lat coords -- now 2 sets of variables
 
+### Ask QQ - How to rewrite hgrid file after changing from lat/lon to UTM
+#gd.write_hgrid('data/hgrid.gr3',value=0.1)
+
 #Reverse operation
 #gd.lon, gd.lat = proj_pts(gd.x, gd.y, "epsg:26918", "epsg:4326")
 #gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
 
 # 2. Create a hgrid.11 file
-# tranform SCHISM grid
+# tranform SCHISM grid from lat/lon to UTM
 
 proj('data/hgrid.gr3',0,'epsg:26918','data/hgrid.ll',0,'epsg:4326')
 
