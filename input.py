@@ -1,11 +1,10 @@
-Generate new files for SCHISM model
+##### Generate new files for SCHISM model #####
 
-# 1. First, generate .2dm grid in SMS, convert to .gr3 file, then generate boundary files grd.bnd
-
+# Before running this code, generate .2dm grid in SMS, convert to hgrid.gr3 file, and put into a new /data folder in the working experiment directory
 # sms2grd('data/latest_mesh_name.2dm','data/hgrid.gr3')
 
-#######convert fron lon/lat to UTM coords #######
-#generate lon and lat variables 
+####### convert hgrid.gr3 fron lon/lat to UTM coords #######
+#generate lon and lat variables first
 
 gd = read_schism_hgrid(“hgrid.gr3”)
 gd.lon,gd.lat=gd.x,gd.y
@@ -15,8 +14,7 @@ gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918") #Reassign x and 
 #gd.lon, gd.lat = proj_pts(gd.x, gd.y, "epsg:26918", "epsg:4326")
 #gd.x, gd.y = proj_pts(gd.lon, gd.lat,"epsg:4326", "epsg:26918")
 
-
-# 2. Make a new empty data/ folder in your project folder, and create a hgrid.11 file
+# 2. Create a hgrid.11 file
 # tranform SCHISM grid
 
 proj('data/hgrid.gr3',0,'epsg:26918','data/hgrid.ll',0,'epsg:4326')
