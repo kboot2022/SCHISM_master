@@ -1,3 +1,5 @@
+Generate new files for SCHISM model
+
 # 1. First, generate .2dm grid in SMS, convert to .gr3 file, then generate boundary files grd.bnd
 
 # sms2grd('data/latest_mesh_name.2dm','data/hgrid.gr3')
