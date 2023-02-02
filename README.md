@@ -8,3 +8,4 @@
             # # sms2grd('data/latest_mesh_name.2dm','data/hgrid.gr3')
     # 3. put grid into a new /data folder in the working experiment directory and delete/archive old grid files in a /data_old folder for reference
 
+# Added to Workstation and new token generated Jan 31, 2023
